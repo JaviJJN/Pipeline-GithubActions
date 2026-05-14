@@ -38,5 +38,10 @@ jobs:
 
     - name: Test with Ant
       working-directory: "Proyecto Biblioteca"
-      run: ant -f build.xml -Djavac.test.classpath=lib/junit-4.13.2.jar:lib/hamcrest-core-1.3.jar test
-    
+      run: |
+        # 1. Forzamos la creación de la carpeta de salida
+        mkdir -p build/classes
+        # 2. Compilamos MANUALMENTE el código fuente antes de correr Ant
+        javac -d build/classes src/biblioteca/*.java
+        # 3. Ahora corremos Ant pasando las librerías de JUnit que descargamos
+        ant -f build.xml -Djavac.test.classpath=lib/junit-4.13.2.jar:lib/hamcrest-core-1.3.jar:build/classes test
