@@ -14,24 +14,21 @@ public class MainBiblioteca {
 	 */
 	public static void main(String[] args) {
 		System.out.println("======================================================");
-		System.out.println(" DEMO GUIADA - Biblioteca (Set -> List -> Map -> Genéricos)");
+		System.out.println(" Biblioteca (Set -> List -> Map -> Genéricos)");
 		System.out.println(" Paquete: biblioteca");
 		System.out.println("======================================================");
+
+		Biblioteca b = new Biblioteca();
 
 		// ------------------------------------------------------------
 		// Datos de ejemplo (los mismos durante toda la demo)
 		// ------------------------------------------------------------
-		Libro l1 = new Libro("9780134685991", "Effective Java", "Joshua Bloch", 2018);
-		Libro l2 = new Libro("9780201633610", "Design Patterns", "Erich Gamma", 1994);
-		Libro l3 = new Libro("9780132350884", "Clean Code", "Robert C. Martin", 2008);
-		// Duplicado lógico (mismo ISBN que l1) para probar equals/hashCode
-		Libro l1Dup = new Libro("9780134685991", "Effective Java (2nd copy)", "J. Bloch", 2001);
+		Libro l1 = new Libro("9788461330010", "El viaje íntimo de la locura", "Roberto Iniesta", 2009);
+		Libro l2 = new Libro("9788439746959", "Peces", "Eva Baltasar", 2026);
+		Libro l3 = new Libro("9788410352018", "Han cantado bingo", "Lana Corujo", 2025);
 
-		Biblioteca b = new Biblioteca();
-
-		// ============================================================
-		// PARTE 1 - Set + equals/hashCode + toString + Iterator.remove
-		// ============================================================
+		Libro l1Dup = new Libro("9788461330010", "El viaje íntimo de la locura", "Roberto Iniesta", 2009);
+		
 		System.out.println();
 		System.out.println("========== PARTE 1: Registro de libros (Set) ==========");
 		System.out.println("Objetivo: evitar duplicados por ISBN usando Set + equals/hashCode.");
@@ -57,7 +54,7 @@ public class MainBiblioteca {
 		System.out.println();
 
 		System.out.println("[P1] Probando eliminarLibro(isbn):");
-		System.out.println("[P1] eliminarLibro(\"9780201633610\") -> esperado: true  | obtenido: " + b.eliminarLibro("9780201633610"));
+		System.out.println("[P1] eliminarLibro(\"9788439746959\") -> esperado: true  | obtenido: " + b.eliminarLibro("9788439746959"));
 		System.out.println("[P1] totalLibros()               -> esperado: 2     | obtenido: " + b.totalLibros());
 		System.out.println("[P1] eliminarLibro(\"NO_EXISTE\")   -> esperado: false | obtenido: " + b.eliminarLibro("NO_EXISTE"));
 		System.out.println();
@@ -89,8 +86,8 @@ public class MainBiblioteca {
 		System.out.println();
 
 		System.out.println("[P3] Estado inicial de ejemplares (tras registrar libros, inventario debe existir con 0):");
-		System.out.println("[P3] ejemplaresDisponibles(l1) -> esperado: 0 | obtenido: " + b.ejemplaresDisponibles("9780134685991"));
-		System.out.println("[P3] ejemplaresDisponibles(l3) -> esperado: 0 | obtenido: " + b.ejemplaresDisponibles("9780132350884"));
+		System.out.println("[P3] ejemplaresDisponibles(l1) -> esperado: 0 | obtenido: " + b.ejemplaresDisponibles("9788461330010"));
+		System.out.println("[P3] ejemplaresDisponibles(l3) -> esperado: 0 | obtenido: " + b.ejemplaresDisponibles("9788410352018"));
 		System.out.println("[P3] totalEjemplares()         -> esperado: 0 | obtenido: " + b.totalEjemplares());
 		System.out.println();
 
@@ -100,23 +97,23 @@ public class MainBiblioteca {
 		System.out.println("[P3] agregarEjemplares(l3, 2)");
 		b.agregarEjemplares(l3, 2);
 
-		System.out.println("[P3] ejemplaresDisponibles(l1) -> esperado: 3 | obtenido: " + b.ejemplaresDisponibles("9780134685991"));
+		System.out.println("[P3] ejemplaresDisponibles(l1) -> esperado: 3 | obtenido: " + b.ejemplaresDisponibles("9788461330010"));
 		System.out.println("[P3] ejemplaresDisponibles(l3) -> esperado: 2 | obtenido: " + b.ejemplaresDisponibles("9780132350884"));
 		System.out.println("[P3] totalEjemplares()         -> esperado: 5 | obtenido: " + b.totalEjemplares());
 		System.out.println();
 
 		System.out.println("[P3] Prestando libros:");
-		System.out.println("[P3] prestarLibro(l1) -> esperado: true  | obtenido: " + b.prestarLibro("9780134685991"));
-		System.out.println("[P3] prestarLibro(l1) -> esperado: true  | obtenido: " + b.prestarLibro("9780134685991"));
-		System.out.println("[P3] prestarLibro(l1) -> esperado: true  | obtenido: " + b.prestarLibro("9780134685991"));
-		System.out.println("[P3] prestarLibro(l1) -> esperado: false | obtenido: " + b.prestarLibro("9780134685991"));
-		System.out.println("[P3] ejemplaresDisponibles(l1) -> esperado: 0 | obtenido: " + b.ejemplaresDisponibles("9780134685991"));
+		System.out.println("[P3] prestarLibro(l1) -> esperado: true  | obtenido: " + b.prestarLibro("9788461330010"));
+		System.out.println("[P3] prestarLibro(l1) -> esperado: true  | obtenido: " + b.prestarLibro("9788461330010"));
+		System.out.println("[P3] prestarLibro(l1) -> esperado: true  | obtenido: " + b.prestarLibro("9788461330010"));
+		System.out.println("[P3] prestarLibro(l1) -> esperado: false | obtenido: " + b.prestarLibro("9788461330010"));
+		System.out.println("[P3] ejemplaresDisponibles(l1) -> esperado: 0 | obtenido: " + b.ejemplaresDisponibles("9788461330010"));
 		System.out.println();
 
 		System.out.println("[P3] Devolviendo libro:");
 		System.out.println("[P3] devolverLibro(l1)");
-		b.devolverLibro("9780134685991");
-		System.out.println("[P3] ejemplaresDisponibles(l1) -> esperado: 1 | obtenido: " + b.ejemplaresDisponibles("9780134685991"));
+		b.devolverLibro("9788461330010");
+		System.out.println("[P3] ejemplaresDisponibles(l1) -> esperado: 1 | obtenido: " + b.ejemplaresDisponibles("9788461330010"));
 		System.out.println();
 
 		System.out.println("[P3] Consultas agregadas:");
@@ -180,7 +177,7 @@ public class MainBiblioteca {
 
 		System.out.println();
 		System.out.println("======================================================");
-		System.out.println(" FIN DE LA DEMO GUIADA");
+		System.out.println(" FIN DE LA DEMO");
 		System.out.println("======================================================");
 	}
 
