@@ -14,15 +14,16 @@ jobs:
     
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v2  # Clona el repositorio
+        uses: actions/checkout@v4  # Clona el repositorio
     
       - name: Set up Node.js
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v4
         with:
           node-version: '24'  # Define la versión de Node.js
+          cache: 'npm'
     
       - name: Install dependencies
-        run: npm install  # Instala las dependencias del proyecto
+        run: npm ci  # Instala las dependencias del proyecto
     
       - name: Run tests
         run: npm test  # Ejecuta los tests
